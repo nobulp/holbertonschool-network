@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Configures /etc/hosts so localhost resolves to 127.0.0.2 and facebook.com to 8.8.8.8
-sed -i 's/127.0.0.1\(.*\)localhost/127.0.0.2\1localhost/' /etc/hosts
-if grep -q "facebook.com" /etc/hosts; then
-    sed -i 's/.*facebook.com.*/8.8.8.8\tfacebook.com/' /etc/hosts
+sed 's/127.0.0.1\(.*\)localhost/127.0.0.2\1localhost/' /etc/hosts > /tmp/hosts_new
+if grep -q "facebook.com" /tmp/hosts_new; then
+    sed -i 's/.*facebook\.com.*/8.8.8.8\tfacebook.com/' /tmp/hosts_new
 else
-    echo -e "8.8.8.8\tfacebook.com" >> /etc/hosts
+    echo -e "8.8.8.8\tfacebook.com" >> /tmp/hosts_new
 fi
+cp /tmp/hosts_new /etc/hosts

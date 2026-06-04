@@ -1,0 +1,174 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="What Happens When..." id="google-flow">
+    <mxGraphModel dx="1300" dy="900" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ── TITLE ── -->
+        <mxCell id="title" value="What Happens When You Type https://www.google.com and Press Enter?"
+          style="text;html=1;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;strokeColor=none;fillColor=none;"
+          vertex="1" parent="1">
+          <mxGeometry x="80" y="30" width="1240" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ── NODES ── -->
+
+        <!-- Browser -->
+        <mxCell id="browser" value="&lt;b&gt;User / Browser&lt;/b&gt;"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;fontSize=12;arcSize=15;"
+          vertex="1" parent="1">
+          <mxGeometry x="80" y="310" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- DNS Server -->
+        <mxCell id="dns" value="&lt;b&gt;DNS Server&lt;/b&gt;"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=12;arcSize=15;"
+          vertex="1" parent="1">
+          <mxGeometry x="80" y="120" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Firewall -->
+        <mxCell id="firewall" value="&lt;b&gt;Firewall&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:10px'&gt;port 443 allowed only&lt;/font&gt;"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;fontSize=12;arcSize=15;"
+          vertex="1" parent="1">
+          <mxGeometry x="320" y="310" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Load Balancer -->
+        <mxCell id="lb" value="&lt;b&gt;Load Balancer&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:10px'&gt;HAProxy — Round Robin&lt;/font&gt;"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontSize=12;arcSize=15;"
+          vertex="1" parent="1">
+          <mxGeometry x="560" y="310" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Web Server -->
+        <mxCell id="web" value="&lt;b&gt;Web Server&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:10px'&gt;Nginx — static assets / proxy&lt;/font&gt;"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;fontSize=12;arcSize=15;"
+          vertex="1" parent="1">
+          <mxGeometry x="820" y="310" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- App Server -->
+        <mxCell id="app" value="&lt;b&gt;Application Server&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:10px'&gt;generates the web page&lt;/font&gt;"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;fontSize=12;arcSize=15;"
+          vertex="1" parent="1">
+          <mxGeometry x="820" y="480" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Database -->
+        <mxCell id="db" value="&lt;b&gt;Database&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:10px'&gt;MySQL&lt;/font&gt;"
+          style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;strokeWidth=2;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="830" y="640" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ── EDGES ── -->
+
+        <!-- 1. Browser → DNS (query) -->
+        <mxCell id="e1" value="① DNS query"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d6b656;strokeWidth=2;fontSize=10;fontStyle=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;"
+          edge="1" source="browser" target="dns" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 2. DNS → Browser (response) -->
+        <mxCell id="e2" value="② IP: 142.250.74.68"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d6b656;strokeWidth=2;fontSize=10;fontStyle=3;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"
+          edge="1" source="dns" target="browser" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="40" y="150" />
+              <mxPoint x="40" y="340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 3. Browser → Firewall (HTTPS encrypted) -->
+        <mxCell id="e3" value="③ HTTPS :443  🔒  TLS encrypted"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#b85450;strokeWidth=2;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"
+          edge="1" source="browser" target="firewall" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 4. Firewall → Load Balancer -->
+        <mxCell id="e4" value="④ Traffic allowed"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#82b366;strokeWidth=2;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"
+          edge="1" source="firewall" target="lb" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 5. Load Balancer → Web Server -->
+        <mxCell id="e5" value="⑤ Distribute request"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#9673a6;strokeWidth=2;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"
+          edge="1" source="lb" target="web" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 6. Web Server → App Server -->
+        <mxCell id="e6" value="⑥ Dynamic request"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d79b00;strokeWidth=2;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;"
+          edge="1" source="web" target="app" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 7. App Server → Database -->
+        <mxCell id="e7" value="⑦ SQL query"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;strokeWidth=2;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;"
+          edge="1" source="app" target="db" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 8. Database → App Server (data returned) -->
+        <mxCell id="e8" value="⑧ Data returned"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;strokeWidth=2;fontSize=10;fontStyle=3;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;"
+          edge="1" source="db" target="app" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="790" y="680" />
+              <mxPoint x="790" y="540" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ── LEGEND ── -->
+        <mxCell id="legend_bg" value=""
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9f9f9;strokeColor=#cccccc;strokeWidth=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="80" y="480" width="620" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend_title" value="&lt;b&gt;Legend&lt;/b&gt;"
+          style="text;html=1;align=left;fontSize=12;strokeColor=none;fillColor=none;"
+          vertex="1" parent="1">
+          <mxGeometry x="100" y="488" width="100" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="l1" value="DNS resolution (unencrypted name lookup)"
+          style="text;html=1;align=left;fontSize=11;strokeColor=none;fillColor=none;fontColor=#d6b656;"
+          vertex="1" parent="1">
+          <mxGeometry x="100" y="514" width="340" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="l2" value="🔒  HTTPS / TLS encrypted traffic"
+          style="text;html=1;align=left;fontSize=11;strokeColor=none;fillColor=none;fontColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="100" y="538" width="340" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="l3" value="Firewall — blocks all ports except 443"
+          style="text;html=1;align=left;fontSize=11;strokeColor=none;fillColor=none;fontColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="100" y="562" width="340" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="l4" value="Internal traffic (app layer)"
+          style="text;html=1;align=left;fontSize=11;strokeColor=none;fillColor=none;fontColor=#666666;"
+          vertex="1" parent="1">
+          <mxGeometry x="100" y="586" width="340" height="20" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
